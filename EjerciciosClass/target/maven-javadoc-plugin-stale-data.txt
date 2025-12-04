@@ -1,0 +1,42 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+--no-fonts
+-encoding
+'UTF-8'
+-protected
+--release
+24
+-sourcepath
+'C:/Users/tarde/Documents/NetBeansProjects/EjerciciosClass/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/tarde/Documents/NetBeansProjects/EjerciciosClass/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'EjerciciosClass 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'EjerciciosClass 1.0-SNAPSHOT API'
+com.accedia.tarde.ejerciciosclass
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\src\main\java = 1762363474393
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\allclasses-index.html = 1762876633783
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\allpackages-index.html = 1762876633786
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\element-list = 1762876633715
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\help-doc.html = 1762876633824
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\index-all.html = 1762876633813
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\index.html = 1762876633819
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\member-search-index.js = 1762876633794
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\module-search-index.js = 1762876633790
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\overview-tree.html = 1762876633766
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\package-search-index.js = 1762876633791
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\search.html = 1762876633816
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\tag-search-index.js = 1762876633796
+C:\Users\tarde\Documents\NetBeansProjects\EjerciciosClass\target\reports\apidocs\type-search-index.js = 1762876633793
