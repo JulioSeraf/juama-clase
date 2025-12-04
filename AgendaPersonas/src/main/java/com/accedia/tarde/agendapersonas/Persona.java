@@ -14,9 +14,9 @@ public class Persona {
     private String email;
     private int edad;
     private String telefono; 
-    public Persona(String nombre, int edad){
+    public Persona(String nombre,String telefono){
         this.nombre = nombre;
-        this.edad = edad;
+        this.telefono = telefono;
     }
     /**
      * 

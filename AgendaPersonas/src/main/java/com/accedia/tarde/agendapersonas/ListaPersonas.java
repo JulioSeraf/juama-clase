@@ -19,9 +19,16 @@ public class ListaPersonas {
     }
     
     public void anadir(Persona nuevaPersona){
-        for(int i = 0; i < lista.length; i++){
-            if(lista[i] == null) lista[i] = nuevaPersona;
-        }
+        boolean adicionado = false;
+        int cont=0;
+        do{
+            if(lista[cont] == null){
+                lista[cont] = nuevaPersona;
+                adicionado = true;
+            }
+            cont++;
+        }while(!adicionado);
+        
     }
     public void mostrar(){
         for(Persona per: lista){
