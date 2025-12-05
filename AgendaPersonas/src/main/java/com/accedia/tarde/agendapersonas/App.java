@@ -17,9 +17,10 @@ public class App {
         String userNombre;
         String userTelefono;
         int userEdad = 0;
-        String userEmail = "sin Infomación"; 
-        
-        System.out.printf("""
+        int userSelect = 0;
+        String userEmail = "sin Infomación";
+        do {
+            System.out.printf("""
                            ====================== Agenda Personal ========================
                            Mostrar Agenda     -> 1
                            Adicionar Contacto -> 2
@@ -28,95 +29,105 @@ public class App {
                            Mostrar Agenda     -> 5
                            Salir              -> 6
 
-                           tamaño de Agenda: %d (para Editar tamaño -> 0);
-                           """,listaTamaño);
-        int userSelect = sc.nextInt();
-        sc.nextLine();
-        if(userSelect == 0){
-            System.out.println("""
+                           tamaño de Agenda: %d (para Editar tamaño -> 10);
+                           """, listaTamaño);
+            userSelect = sc.nextInt();
+            sc.nextLine();
+            if (userSelect == 10) {
+                System.out.println("""
                                    ===============================================================
                                    SI EDITAS TAMAÑO DE AGENDA LOS DATOS GUARDADOS SE PERDERAM !!!!
                                    ===============================================================
                                    Editar -> si/no
                                    """);
-               String editar = sc.nextLine();
-                if(editar.equalsIgnoreCase("si")){
+                String editar = sc.nextLine();
+                if (editar.equalsIgnoreCase("si")) {
                     System.out.println("""
                                        ===================
                                        ¡datos borrados!
                                        ===================
                                        informe tamaño:
                                        """);
-                    do{
-                        if(listaTamaño <= 0) System.out.println("tamaño invalido !!");
+                    do {
+                        if (listaTamaño <= 0) {
+                            System.out.println("tamaño invalido !!");
+                        }
                         listaTamaño = sc.nextInt();
-                    }while(listaTamaño <= 0);
-                    
-                                        
+                    } while (listaTamaño <= 0);
+
                 }
             }
-        
-        var lista = new ListaPersonas(listaTamaño);
-        switch (userSelect) {
-            case 1 ->
-                lista.mostrar();
-            case 2 -> {
-                System.out.println("""
+
+            var lista = new ListaPersonas(listaTamaño);
+            switch (userSelect) {
+                case 1 ->
+                    lista.mostrar();
+                case 2 -> {
+                    System.out.println("""
                                    ================ Informe Datos: ===============
                                    Nombre:
                                    """);
-                userNombre = sc.nextLine();
-                System.out.println("Telefono: ");
-                do{
-                 userTelefono = sc.nextLine();
-                 if(!userTelefono.matches("\\d+")) System.out.println("Telefono Invalido!!");
-                }while(!userTelefono.matches("\\d+"));
-                System.out.println("""
+                    userNombre = sc.nextLine();
+                    System.out.println("Telefono: ");
+                    do {
+                        userTelefono = sc.nextLine();
+                        if (!userTelefono.matches("\\d+")) {
+                            System.out.println("Telefono Invalido!!");
+                        }
+                    } while (!userTelefono.matches("\\d+"));
+                    System.out.println("""
                                    Adicionar mas información ?
                                    Si/No
                                    """);
-                String masInfo = sc.nextLine();
-                if (masInfo.trim().equalsIgnoreCase("si")) {
-                    System.out.println("""
+                    String masInfo = sc.nextLine();
+                    if (masInfo.trim().equalsIgnoreCase("si")) {
+                        System.out.println("""
                                        =============== info extra =================
                                        Edad: 
                                        """);
-                    boolean edadCorreta = true;
-                    do {
-                        if (!edadCorreta) {
-                            System.out.println("Edad Invalida !!!");
+                        boolean edadCorreta = true;
+                        do {
+                            if (!edadCorreta) {
+                                System.out.println("Edad Invalida !!!");
+                            }
+                            userEdad = sc.nextInt();
+                            sc.nextLine();
+                            edadCorreta = false;
+                        } while (userEdad <= 0);
+
+                        System.out.println("Email: ");
+
+                        do {
+                             userEmail = sc.nextLine();
+                            if (!userEmail.contains("@")&& !userEmail.trim().equals("")) {
+                                System.out.println("formato de email Invalido !!");
+                            }
+                           
+                        } while (!userEmail.contains("@") && !userEmail.trim().equals(""));
+                        if (userEmail.trim().equals("")) {
+                            userEmail = "sin Información";
                         }
-                        userEdad = sc.nextInt();
-                        sc.nextLine();
-                        edadCorreta = false;
-                    } while (userEdad <= 0);
-                    
-                    System.out.println("Email: ");
-                   
-                    
-                    do{
-                        if(!userEmail.contains("@")) System.out.println("formato de email Invalido !!");
-                         userEmail = sc.nextLine();
-                    }while(!userEmail.contains("@") || !userEmail.trim().equals(""));
-                    if (userEmail.trim().equals("")) {
-                        userEmail = "sin Información";
+
                     }
-
+                    lista.anadir(new Persona(userNombre, userTelefono, userEmail, userEdad));
+                    System.out.println("""
+                                                    ===================
+                                                    Contacto adicionado
+                                                    ===================
+                                       """);
                 }
-                lista.anadir(new Persona(userNombre,userTelefono,userEmail,userEdad));
-
+                case 3 -> {
+                }
+                case 4 -> {
+                }
+                case 5 -> {
+                }
+                case 6 ->
+                    System.out.println("Ok, Bye!!!");
+                default -> {
+                }
             }
-            case 3 -> {
-            }
-            case 4 -> {
-            }
-            case 5 -> {
-            }
-            case 6 ->
-                System.out.println("Ok, Bye!!!");
-            default -> {
-            }
-        }
-
+        } while (userSelect != 6);
     }
+
 }
