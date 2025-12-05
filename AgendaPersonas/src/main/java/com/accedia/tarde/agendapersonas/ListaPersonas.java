@@ -19,12 +19,13 @@ public class ListaPersonas {
     }
 
     public void anadir(Persona nuevaPersona) {
-        boolean adicionado = false;
+        boolean adicionado = true;
         int cont = 0;
+        System.out.println(lista[cont]);
         do {
             if (lista[cont] == null) {
                 lista[cont] = nuevaPersona;
-                adicionado = true;
+                adicionado = false;
             }
             cont++;
         } while (adicionado);

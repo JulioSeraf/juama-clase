@@ -87,17 +87,18 @@ public class App {
                             System.out.println("Edad Invalida !!!");
                         }
                         userEdad = sc.nextInt();
+                        sc.nextLine();
                         edadCorreta = false;
                     } while (userEdad <= 0);
                     
                     System.out.println("Email: ");
-                    userEmail = sc.nextLine();
+                   
                     
-                    
+                    do{
+                        if(!userEmail.contains("@")) System.out.println("formato de email Invalido !!");
+                         userEmail = sc.nextLine();
+                    }while(!userEmail.contains("@") || !userEmail.trim().equals(""));
                     if (userEmail.trim().equals("")) {
-                        userEmail = "sin Información";
-                    } else if (!userEmail.contains("@")) {
-                        System.out.println("Email invalido!!");
                         userEmail = "sin Información";
                     }
 
