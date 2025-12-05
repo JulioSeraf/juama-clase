@@ -4,44 +4,69 @@
  */
 package com.accedia.tarde.agendapersonas;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author tarde
  */
 public class ListaPersonas {
-    private Persona[] lista;
-    private final int contador; 
-    public ListaPersonas(int contador){
+
+    private final Persona[] lista;
+    private final int contador;
+
+    public ListaPersonas(int contador) {
         this.contador = contador;
         this.lista = new Persona[contador];
     }
-    
-    public void anadir(Persona nuevaPersona){
+
+    public void anadir(Persona nuevaPersona) {
         boolean adicionado = false;
-        int cont=0;
-        do{
-            if(lista[cont] == null){
+        int cont = 0;
+        do {
+            if (lista[cont] == null) {
                 lista[cont] = nuevaPersona;
                 adicionado = true;
             }
             cont++;
-        }while(!adicionado);
-        
+        } while (adicionado);
     }
-    public void mostrar(){
-        for(Persona per: lista){
-            System.out.printf("""
+
+    private void info(Persona per) {
+        System.out.printf("""
                               =============================
                               Nombre: -> %s
-                              Apellido -> %s
                               Edad -> &d
-                              Telefono -> $s
-                              Email -> %s
-                              Dirección -> %s
-                             """);
+                              Telefono -> $d
+                              Email -> %s 
+                              =============================\n
+                             """,
+                per.getNombre(),
+                per.getEdad(),
+                per.getTelefono(),
+                per.getEmail());
+    }
+
+    public void mostrar() {
+        boolean vacio = true;
+        for(Persona per : lista){
+            if(per != null){
+                vacio = false;
+                this.info(per);
+            }
+         }
+        if(vacio){
+            System.out.println("Agenda Vacia");
+        }
+
+        
+    }
+
+    public void buscar(String info) {
+        for (Persona per : lista) {
+            if (per.getNombre().contains(info)
+                    || per.getTelefono().contains(info)) {
+                this.info(per);
+            }
         }
     }
-    
+
 }

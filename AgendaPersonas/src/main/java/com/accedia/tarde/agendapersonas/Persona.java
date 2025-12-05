@@ -10,13 +10,14 @@ package com.accedia.tarde.agendapersonas;
  */
 public class Persona {
     private String nombre;
-    private String apellido;
     private String email;
     private int edad;
-    private String telefono; 
-    public Persona(String nombre,String telefono){
+    private String telefono ; 
+    public Persona(String nombre,String telefono, String email, int edad){
         this.nombre = nombre;
         this.telefono = telefono;
+        this.email = email;
+        this.edad = edad;
     }
     /**
      * 
@@ -45,20 +46,6 @@ public class Persona {
      */
     public void setNombre(String nombre){
         this.nombre = nombre;
-    }
-
-    /**
-     * @return the apellido
-     */
-    public String getApellido() {
-        return apellido;
-    }
-
-    /**
-     * @param apellido the apellido to set
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     /**
