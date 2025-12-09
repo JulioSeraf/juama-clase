@@ -14,11 +14,13 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int listaTamaño = 50;
+        var lista = new ListaPersonas(listaTamaño);
         String userNombre;
         String userTelefono;
         int userEdad = 0;
         int userSelect = 0;
         String userEmail = "sin Infomación";
+
         do {
             System.out.printf("""
                            ====================== Agenda Personal ========================
@@ -54,11 +56,10 @@ public class App {
                         }
                         listaTamaño = sc.nextInt();
                     } while (listaTamaño <= 0);
-
+                    lista = new ListaPersonas(listaTamaño);
                 }
             }
 
-            var lista = new ListaPersonas(listaTamaño);
             switch (userSelect) {
                 case 1 ->
                     lista.mostrar();
@@ -98,11 +99,11 @@ public class App {
                         System.out.println("Email: ");
 
                         do {
-                             userEmail = sc.nextLine();
-                            if (!userEmail.contains("@")&& !userEmail.trim().equals("")) {
+                            userEmail = sc.nextLine();
+                            if (!userEmail.contains("@") && !userEmail.trim().equals("")) {
                                 System.out.println("formato de email Invalido !!");
                             }
-                           
+
                         } while (!userEmail.contains("@") && !userEmail.trim().equals(""));
                         if (userEmail.trim().equals("")) {
                             userEmail = "sin Información";

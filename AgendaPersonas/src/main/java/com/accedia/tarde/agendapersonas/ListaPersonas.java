@@ -21,7 +21,6 @@ public class ListaPersonas {
     public void anadir(Persona nuevaPersona) {
         boolean adicionado = true;
         int cont = 0;
-        System.out.println(lista[cont]);
         do {
             if (lista[cont] == null) {
                 lista[cont] = nuevaPersona;
@@ -35,8 +34,8 @@ public class ListaPersonas {
         System.out.printf("""
                               =============================
                               Nombre: -> %s
-                              Edad -> &d
-                              Telefono -> $d
+                              Edad -> %d
+                              Telefono -> %S
                               Email -> %s 
                               =============================\n
                              """,
@@ -57,7 +56,7 @@ public class ListaPersonas {
         if(vacio){
             System.out.println("Agenda Vacia");
         }
-
+        
         
     }
 
