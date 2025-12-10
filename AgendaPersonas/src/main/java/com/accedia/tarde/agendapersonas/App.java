@@ -11,6 +11,21 @@ import java.util.Scanner;
  */
 public class App {
 
+    public static int isNumber(Scanner sc) {
+        int userSelect = 0;
+        boolean ok = false;
+        do {
+            String userResComp = sc.nextLine();
+            try {
+                userSelect = Integer.parseInt(userResComp);
+                ok = true;
+            } catch (NumberFormatException er) {
+                System.out.println("Valor invalido !!!");
+            }
+        } while (!ok);
+        return userSelect;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int listaTamaño = 50;
@@ -28,14 +43,14 @@ public class App {
                            Adicionar Contacto -> 2
                            Editar Contacto    -> 3
                            Buscar Contacto    -> 4
-                           Mostrar Agenda     -> 5
-                           Salir              -> 6
+                           Salir              -> 5
 
-                           tamaño de Agenda: %d (para Editar tamaño -> 10);
+                           tamaño de Agenda: %d (para Editar tamaño -> 6);
                            """, listaTamaño);
-            userSelect = sc.nextInt();
-            sc.nextLine();
-            if (userSelect == 10) {
+
+            userSelect = isNumber(sc);
+
+            if (userSelect == 6) {
                 System.out.println("""
                                    ===============================================================
                                    SI EDITAS TAMAÑO DE AGENDA LOS DATOS GUARDADOS SE PERDERAM !!!!
@@ -59,76 +74,133 @@ public class App {
                     lista = new ListaPersonas(listaTamaño);
                 }
             }
-
-            switch (userSelect) {
-                case 1 ->
-                    lista.mostrar();
-                case 2 -> {
-                    System.out.println("""
+            if (userSelect == 2) {
+                System.out.print("""
                                    ================ Informe Datos: ===============
                                    Nombre:
                                    """);
-                    userNombre = sc.nextLine();
-                    System.out.println("Telefono: ");
-                    do {
-                        userTelefono = sc.nextLine();
-                        if (!userTelefono.matches("\\d+")) {
-                            System.out.println("Telefono Invalido!!");
-                        }
-                    } while (!userTelefono.matches("\\d+"));
-                    System.out.println("""
+                userNombre = sc.nextLine();
+                System.out.println("Telefono: ");
+                do {
+                    userTelefono = sc.nextLine();
+                    if (!userTelefono.matches("\\d+")) {
+                        System.out.println("Telefono Invalido!!");
+                    }
+                } while (!userTelefono.matches("\\d+"));
+                System.out.println("""
                                    Adicionar mas información ?
                                    Si/No
                                    """);
-                    String masInfo = sc.nextLine();
-                    if (masInfo.trim().equalsIgnoreCase("si")) {
-                        System.out.println("""
+                String masInfo = sc.nextLine();
+                if (masInfo.trim().equalsIgnoreCase("si")) {
+                    System.out.println("""
                                        =============== info extra =================
                                        Edad: 
                                        """);
-                        boolean edadCorreta = true;
-                        do {
-                            if (!edadCorreta) {
-                                System.out.println("Edad Invalida !!!");
-                            }
-                            userEdad = sc.nextInt();
-                            sc.nextLine();
-                            edadCorreta = false;
-                        } while (userEdad <= 0);
+                    boolean edadCorreta = true;
+                    do {
+                        if (!edadCorreta) {
+                            System.out.println("Edad Invalida !!!");
+                        }
+                        userEdad = isNumber(sc);
+                        edadCorreta = false;
+                    } while (userEdad <= 0);
 
-                        System.out.println("Email: ");
+                    System.out.println("Email: ");
 
-                        do {
-                            userEmail = sc.nextLine();
-                            if (!userEmail.contains("@") && !userEmail.trim().equals("")) {
-                                System.out.println("formato de email Invalido !!");
-                            }
-
-                        } while (!userEmail.contains("@") && !userEmail.trim().equals(""));
-                        if (userEmail.trim().equals("")) {
-                            userEmail = "sin Información";
+                    do {
+                        userEmail = sc.nextLine();
+                        if (!userEmail.contains("@") && !userEmail.trim().equals("")) {
+                            System.out.println("formato de email Invalido !!");
                         }
 
+                    } while (!userEmail.contains("@") && !userEmail.trim().equals(""));
+                    if (userEmail.trim().equals("")) {
+                        userEmail = "sin Información";
                     }
-                    lista.anadir(new Persona(userNombre, userTelefono, userEmail, userEdad));
-                    System.out.println("""
+
+                }
+                lista.anadir(new Persona(userNombre, userTelefono, userEmail, userEdad));
+                System.out.println("""
                                                     ===================
                                                     Contacto adicionado
                                                     ===================
                                        """);
-                }
-                case 3 -> {
-                }
-                case 4 -> {
-                }
-                case 5 -> {
-                }
-                case 6 ->
-                    System.out.println("Ok, Bye!!!");
-                default -> {
+            }
+            if (lista.vacio()) {
+                switch (userSelect) {
+                    case 1 -> {
+                        System.out.println("===================== Lista de Contactos ======================");
+                        lista.mostrar();
+                    }
+                    case 3 -> {
+                        System.out.print("""
+                                           ======================== Editar Contacto ========================
+                                           Buscar Contacto:
+                                           """);
+                        String PerToFind = sc.nextLine();
+                        Persona findPer = lista.buscar(PerToFind);
+                        int useOption = 0;
+                        do {
+                            System.out.printf(
+                                    """
+                                           ========================= %s ===============================
+                                          Editar Nombre   -> 1
+                                          Editar Telefono -> 2
+                                          Editar Edad     -> 3
+                                          Editar Email    -> 4
+                                          Salir           -> 5
+                                           """, findPer.getNombre());
+                            useOption = isNumber(sc);
+                            switch (useOption) {
+                                case 1 -> {
+                                    System.out.println("Cambiar Nombre: ");
+                                    String newName = sc.nextLine();
+                                    findPer.setNombre(newName);
+                                }
+                                case 2 -> {
+                                    System.out.println("Cambiar Telefono: ");
+                                    String newTelefono = sc.nextLine();
+                                    findPer.setTelefono(newTelefono);
+                                }
+                                case 3 -> {
+                                    System.out.println("Cambiar Edad: ");
+                                    String newEdad = sc.nextLine();
+                                    findPer.setEdad(userEdad);
+                                }
+                                case 4 -> {
+                                    System.out.println("Cambiar Email: ");
+                                    String newEmail = sc.nextLine();
+                                    findPer.setEmail(newEmail);
+                                }
+                                default -> {
+                                    System.out.println("Valor Invalido !!!");
+                                }
+                            }
+                        } while (useOption != 5);
+                        
+                        if (useOption >= 1 && useOption <= 4) {
+                            System.out.println("""
+                                               ==================
+                                                Contacto Editado 
+                                               ==================
+                                               """);
+                        }
+                    }
+
+                    case 4 -> {
+                        System.out.println("""
+                                        ================== Buscar Contacto ===================
+                                       Informe Nombre:
+                                       """);
+                        String PerToFind = sc.nextLine();
+                        lista.buscar(PerToFind);
+
+                    }
                 }
             }
-        } while (userSelect != 6);
+
+        } while (userSelect != 5);
     }
 
 }

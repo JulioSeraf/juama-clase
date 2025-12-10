@@ -17,7 +17,25 @@ public class ListaPersonas {
         this.contador = contador;
         this.lista = new Persona[contador];
     }
-
+    
+    public boolean vacio(){
+        boolean hayPer = false;
+        for(var per: lista){
+            if(per != null){
+                hayPer = true;
+                break;
+            }
+        }
+        if(!hayPer){
+             System.out.println("""
+                                                ====================
+                                                =   Agenda Vacia!  =
+                                                ====================
+                               """);
+        }
+        return hayPer;
+    }
+    
     public void anadir(Persona nuevaPersona) {
         boolean adicionado = true;
         int cont = 0;
@@ -34,39 +52,40 @@ public class ListaPersonas {
         System.out.printf("""
                               =============================
                               Nombre: -> %s
-                              Edad -> %d
                               Telefono -> %S
+                              Edad -> %d
                               Email -> %s 
                               =============================\n
                              """,
                 per.getNombre(),
-                per.getEdad(),
                 per.getTelefono(),
+                per.getEdad(),
                 per.getEmail());
     }
 
     public void mostrar() {
-        boolean vacio = true;
-        for(Persona per : lista){
+            for(Persona per : lista){
             if(per != null){
-                vacio = false;
                 this.info(per);
             }
-         }
-        if(vacio){
-            System.out.println("Agenda Vacia");
-        }
-        
-        
-    }
-
-    public void buscar(String info) {
+         }   
+    } 
+    public Persona buscar(String info) {
+        boolean encontrada = false;
+        Persona setPer = null;
         for (Persona per : lista) {
-            if (per.getNombre().contains(info)
-                    || per.getTelefono().contains(info)) {
+            if(per != null && per.getNombre().toLowerCase().contains(info.trim().toLowerCase()) ){
                 this.info(per);
+                setPer = per;
+                encontrada = true;
             }
         }
+        if(!encontrada) System.out.println("""
+                                                                        ======================
+                                                                        Contacto no encontrado
+                                                                        ======================
+                                           """);
+        return setPer;
     }
 
 }
