@@ -92,8 +92,6 @@ public class App {
                     
                     System.out.println("Email: ");
                     userEmail = sc.nextLine();
-                    
-                    
                     if (userEmail.trim().equals("")) {
                         userEmail = "sin Información";
                     } else if (!userEmail.contains("@")) {
