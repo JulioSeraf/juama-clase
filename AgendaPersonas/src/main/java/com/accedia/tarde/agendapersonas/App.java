@@ -113,7 +113,6 @@ public class App {
                         if (!userEmail.contains("@") && !userEmail.trim().equals("")) {
                             System.out.println("formato de email Invalido !!");
                         }
-<<<<<<< HEAD
                         userEdad = sc.nextInt();
                         edadCorreta = false;
                     } while (userEdad <= 0);
@@ -125,16 +124,9 @@ public class App {
                     } else if (!userEmail.contains("@")) {
                         System.out.println("Email invalido!!");
                         userEmail = "sin Información";
-=======
-
-<<<<<<< HEAD
-                    } while (!userEmail.contains("@") && !userEmail.trim().equals(""));
+        } while (!userEmail.contains("@") && !userEmail.trim().equals(""));
                     if (userEmail.trim().equals("")) {
-                        userEmail = "sin Información";
-=======
->>>>>>> e0824dc38c90d2bbc190beb300cdd0acaeef0fcf
->>>>>>> 9db798676c71c9a016d65fcadbb1f618d8836b09
-                    }
+                        userEmail = "sin Información";          }
 
                 }
                 lista.anadir(new Persona(userNombre, userTelefono, userEmail, userEdad));
