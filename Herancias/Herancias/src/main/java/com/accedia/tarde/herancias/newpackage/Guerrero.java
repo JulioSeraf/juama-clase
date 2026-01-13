@@ -8,6 +8,26 @@ package com.accedia.tarde.herancias.newpackage;
  *
  * @author tarde
  */
-public class Personaje {
-    
+public class Guerrero extends Vida implements Ataque{
+    private final String Name;
+    public Guerrero(){
+        this.Name = "";
+        }
+    public Guerrero(String name, int vida){
+        super(vida);
+        this.Name = name;
+    }
+
+    @Override
+    public int getHp() {
+        return
+    }
+
+    @Override
+    public void setHp() {
+    }
+
+    @Override
+    public int nado() {
+    }
 }

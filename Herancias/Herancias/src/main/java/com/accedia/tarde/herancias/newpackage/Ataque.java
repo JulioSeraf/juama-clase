@@ -9,5 +9,5 @@ package com.accedia.tarde.herancias.newpackage;
  * @author tarde
  */
 public interface Ataque {
-    
+    public int nado();
 }

@@ -8,6 +8,15 @@ package com.accedia.tarde.herancias.newpackage;
  *
  * @author tarde
  */
-public class Vida {
+public abstract class Vida {
+    private int hp; 
+    public Vida(){};
+   public Vida(int hp){
+       this.hp = hp;
+   }
+   public abstract int getHp();
+   public abstract void setHp();
+       
+   
     
 }
