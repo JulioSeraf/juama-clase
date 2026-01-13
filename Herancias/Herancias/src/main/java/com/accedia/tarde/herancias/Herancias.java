@@ -54,9 +54,18 @@ public class Herancias {
         kautoniudo.nada();
         kautoniudo.volar();
         
-        System.out.println("=========================== Ejercico 11 =============================");
+        System.out.println("=========================== Ejercicio 11 =============================");
         Volador v = new Pajaro();
         v.volar();
-                
+        System.out.println("poque el tipo declarado de la variable nos es pajaro, solo se puede usar los metodos sobreescrito de la interface volador que es el tipo");
+        
+        System.out.println("=========================== Ejercicio 12 =============================");
+        MotoElectrica moto = new MotoElectrica();
+        moto.velocidad = 10;
+        System.out.println(moto.velocidad);
+        moto.mover();
+        System.out.println("Vehiculo no es una interface ya que lleva atributo");
+        System.out.println("============================== Ejercicio 13 ==============================");
+        
     }
 }
