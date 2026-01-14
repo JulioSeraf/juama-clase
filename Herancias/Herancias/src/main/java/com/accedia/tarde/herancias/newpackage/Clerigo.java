@@ -8,27 +8,27 @@ package com.accedia.tarde.herancias.newpackage;
  *
  * @author tarde
  */
-public class Guerrero extends Vida implements Ataque,Defensa{
-    private final String Name;
-    public Guerrero(String name){
-        super(200);
-        this.Name = name;
-        }
-    public Guerrero(String name, int vida){
+public class Clerigo extends Vida implements Curacion, Ataque{
+    private final String NAME;
+    public Clerigo(){
+        super(400);
+        this.NAME = "none";
+    }
+    public Clerigo(String name, int vida){
         super(vida);
-        this.Name = name;
+        this.NAME = name;
     }
     public String getName(){
-        return this.Name;
+        return this.NAME;
+    }
+    @Override
+    public int curar() {
+        return 200;
     }
 
     @Override
     public int dano() {
-        return -300;
-    }
-
-    @Override
-    public int shild() {
         return -100;
     }
+    
 }

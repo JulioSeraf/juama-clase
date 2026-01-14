@@ -10,12 +10,15 @@ package com.accedia.tarde.herancias.newpackage;
  */
 public abstract class Vida {
     private int hp; 
-    public Vida(){};
    public Vida(int hp){
        this.hp = hp;
    }
-   public abstract int getHp();
-   public abstract void setHp();
+   public int getHp(){
+       return this.hp;
+   };
+   public void setHp(int hp){
+       this.hp = hp;
+   };
        
    
     

@@ -8,10 +8,8 @@ package com.accedia.tarde.herancias;
  *
  * @author tarde
  */
-public class Avion extends Configuracion implements Volador {
-    @Override
-    public void volar() {
-        System.out.println("Vola con las turbinas y elices");
+public  class Configuracion {
+    public final void color(){
+        System.out.println("Azul");
     }
-    
 }

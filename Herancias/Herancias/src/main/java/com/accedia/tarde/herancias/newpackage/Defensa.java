@@ -8,6 +8,6 @@ package com.accedia.tarde.herancias.newpackage;
  *
  * @author tarde
  */
-public interface Ataque {
-    public int dano();
+public interface Defensa {
+    public int shild();
 }
