@@ -79,5 +79,7 @@ public class Herancias {
         Animal a = new Perro();
         a.hacerSonido();
         System.out.println("El tipo de la referencia es Animal, el tipo real Perro, se ejecuta el metodo mas cercano al tipo real o sea el de Perro");
+                
+        
     }
 }
