@@ -57,6 +57,7 @@ public class Herancias {
         System.out.println("=========================== Ejercico 11 =============================");
         Volador v = new Pajaro();
         v.volar();
+        
                 
     }
 }
