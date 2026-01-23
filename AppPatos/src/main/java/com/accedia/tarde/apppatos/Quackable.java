@@ -2,16 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.accedia.tarde.herancias;
+package com.accedia.tarde.apppatos;
 
 /**
  *
-<<<<<<< HEAD
- * @author User
-=======
  * @author tarde
->>>>>>> 1e13bcb209715bd84ddd67e49bacee2f1ccf6815
  */
-public interface Nadador {
-    public void nada();
+public interface Quackable {
+    void quack();
 }

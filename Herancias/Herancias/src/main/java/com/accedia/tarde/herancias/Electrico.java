@@ -6,12 +6,8 @@ package com.accedia.tarde.herancias;
 
 /**
  *
-<<<<<<< HEAD
- * @author User
-=======
  * @author tarde
->>>>>>> 1e13bcb209715bd84ddd67e49bacee2f1ccf6815
  */
-public interface Nadador {
-    public void nada();
+public interface Electrico {
+    public void eletricidad();
 }
