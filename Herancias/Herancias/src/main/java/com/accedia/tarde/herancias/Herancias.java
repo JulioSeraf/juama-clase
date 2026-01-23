@@ -58,9 +58,7 @@ public class Herancias {
         System.out.println("=========================== Ejercicio 11 =============================");
         Volador v = new Pajaro();
         v.volar();
-<<<<<<< HEAD
-        
-=======
+
         System.out.println("poque el tipo declarado de la variable nos es pajaro, solo se puede usar los metodos sobreescrito de la interface volador que es el tipo");
 
         System.out.println("=========================== Ejercicio 12 =============================");
@@ -82,7 +80,6 @@ public class Herancias {
         Animal a = new Perro();
         a.hacerSonido();
         System.out.println("El tipo de la referencia es Animal, el tipo real Perro, se ejecuta el metodo mas cercano al tipo real o sea el de Perro");
->>>>>>> 1e13bcb209715bd84ddd67e49bacee2f1ccf6815
                 
         
     }
