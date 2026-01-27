@@ -6,11 +6,9 @@ package com.accedia.tarde.herancias;
 
 /**
  *
-<<<<<<< HEAD
- * @author User
+ * @author tarde
  */
-public class Avion implements Volador {
-
+public class Avion extends Configuracion implements Volador {
     @Override
     public void volar() {
         System.out.println("Vola con las turbinas y elices");
