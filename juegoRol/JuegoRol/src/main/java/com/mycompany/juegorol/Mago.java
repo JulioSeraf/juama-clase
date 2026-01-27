@@ -17,19 +17,7 @@ public class Mago extends Personaje{
     public void personajeFrase(){
         System.out.println("Abrakadabra");
     }
-
-    @Override
-    public void mostrar() {
-        System.out.printf("""
-                           ============== Estado Mago =============
-                           ==============     %s      =============
-                           ==============    Vida     =============
-                           ====== ATAQUE =========== DEFESA =======
-                           ======   %d   ===========   %d   =======
-                           """,super.getNombre(), this.ATAQUE, this.DEFESA);
-        
-    }
-    
+   
     @Override
     public int Ataque() {
         System.out.println("ABRAKADABRA!!");

@@ -14,17 +14,7 @@ public class Arquero extends Personaje {
     public Arquero(String name){
         super(name);
     }
-    @Override
-    public void mostrar() {
-        System.out.printf("""
-                           ============== Estado Arquero =============
-                           ==============     %s      =============
-                           ==============    Vida     =============
-                           ====== ATAQUE =========== DEFESA =======
-                           ======   %d   ===========   %d   =======
-                           """, super.getNombre(), this.ATAQUE, this.DEFESA);
-    }
-
+   
     @Override
     public int Ataque() {
         return this.ATAQUE;

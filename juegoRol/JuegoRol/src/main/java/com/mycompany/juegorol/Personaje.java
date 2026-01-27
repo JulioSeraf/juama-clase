@@ -14,19 +14,12 @@ public abstract class  Personaje {
     public Personaje(String nombre){
         this.NOMBRE = nombre;
     };
-    public int getVida(){
-        return 100;
+    public void mostrar(){
+        
     };
-    public void setVida(int dano){
-        this.vida = this.vida - dano;
-    };
-    public abstract void mostrar();
     
     public abstract int Ataque();
     
     public abstract int Defesa();
     
-    public String getNombre(){
-        return this.NOMBRE;
-    } 
 }
