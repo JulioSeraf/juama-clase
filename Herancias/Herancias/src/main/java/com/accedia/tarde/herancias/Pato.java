@@ -6,28 +6,31 @@ package com.accedia.tarde.herancias;
 
 /**
  *
- * @author tarde
+<<<<<<< HEAD
+ * @author User
  */
-public class Pato extends Animal implements Caminante,Nadador,Volador {
+public class Pato extends Animal implements Caminante, Nadador,Volador {
 
     @Override
     public void hacerSonido() {
-        System.out.println("Kua!! hua!! ");
+        System.out.println("kual kual");
+
     }
 
     @Override
     public void camina() {
-        System.out.println("camina con las pata, pero mal");
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void nada() {
-           System.out.println("nada con las pata, tbm mal");
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void volar() {
-        System.out.println("Vola con las alas, y lo hace peor");
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+   
 }

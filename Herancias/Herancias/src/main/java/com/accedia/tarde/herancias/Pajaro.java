@@ -6,13 +6,19 @@ package com.accedia.tarde.herancias;
 
 /**
  *
- * @author tarde
+<<<<<<< HEAD
+ * @author User
  */
-public class Pajaro implements Volador {
+public class Pajaro implements Volador{
 
     @Override
     public void volar() {
-        System.out.println("Vola con las alas");
+        System.out.println("Volando con Bater de alas");
+    }
+    public void plumaje(){
+        System.out.println("azul y amarillo");
+
+
     }
     
 }

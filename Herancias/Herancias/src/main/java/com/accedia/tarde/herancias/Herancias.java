@@ -58,6 +58,7 @@ public class Herancias {
         System.out.println("=========================== Ejercicio 11 =============================");
         Volador v = new Pajaro();
         v.volar();
+
         System.out.println("poque el tipo declarado de la variable nos es pajaro, solo se puede usar los metodos sobreescrito de la interface volador que es el tipo");
 
         System.out.println("=========================== Ejercicio 12 =============================");
