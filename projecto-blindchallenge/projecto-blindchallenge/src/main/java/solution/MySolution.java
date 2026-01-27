@@ -21,8 +21,10 @@ public class MySolution extends SolutionBase {
     }
     if (args.length > 2) {
       return true;
-    } else {
-      throw new IllegalArgumentException("Already exists");
+    } 
+    if(args[0].equals("PUT")){
+        if(person.isEmpty()) person.put("name", args[2]);
+        
     }
   }
 }
