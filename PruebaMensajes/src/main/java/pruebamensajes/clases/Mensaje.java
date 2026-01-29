@@ -11,10 +11,10 @@ package pruebamensajes.clases;
 public abstract class Mensaje {
     private String contenido = "";
     private String destinatario = "";
-    protected boolean enviado = false;
+    private boolean enviado = false;
     public Mensaje(){};
     public Mensaje(String c){
-        this.contenido =c;
+        this.contenido = c;
     };
     public Mensaje(String c, String d){
         this.contenido = c;
@@ -41,6 +41,14 @@ public abstract class Mensaje {
 
     public void setDestinatario(String destinatario) {
         this.destinatario = destinatario;
+    }
+
+    public boolean isEnviado() {
+        return enviado;
+    }
+
+    public void setEnviado(boolean enviado) {
+        this.enviado = enviado;
     }
 
    

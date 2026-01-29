@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pruebamensajes.clases;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -10,14 +11,18 @@ import java.util.regex.Matcher;
  *
  * @author tarde
  */
-public class  Email extends Mensaje implements Enviar{
-    public boolean enviado;
+public class Email extends Mensaje implements Enviar {
+
     Pattern regex = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     private String asunto = "";
-    public Email(String contenido,String a, String destinatario){
-        super(contenido,destinatario);
+
+    public Email(String contenido, String a, String destinatario) {
+        super(contenido, destinatario);
+        System.out.println(contenido + destinatario);
+
         this.asunto = a;
     }
+
     @Override
     public boolean validadDestinatario() {
         Matcher isValido = regex.matcher(super.getDestinatario());
@@ -26,7 +31,7 @@ public class  Email extends Mensaje implements Enviar{
 
     @Override
     public void isEnviado(boolean v) {
-        super.enviado = v;
+       super.setEnviado(v);
     }
-    
+
 }

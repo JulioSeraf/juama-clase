@@ -26,7 +26,7 @@ public class WhatsApp extends Mensaje implements Enviar{
     
     @Override
     public void isEnviado(boolean v) {
-        super.enviado = v;
+        super.setEnviado(v);
     }
     
 }
