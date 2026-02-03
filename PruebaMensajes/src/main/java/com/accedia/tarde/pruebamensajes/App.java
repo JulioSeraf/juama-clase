@@ -27,7 +27,6 @@ public class App {
             switch (m) {
                 case WhatsApp w -> {
                     if (!w.validadDestinatario()) {
-                        w.isEnviado(false);
                         throw new IllegalArgumentException(String.format("Destinatario %s no encontrado", w.getDestinatario()));
                     }
                     w.isEnviado(true);
@@ -35,7 +34,6 @@ public class App {
                 }
                 case Email e -> {
                     if (!e.validadDestinatario()) {
-                        e.isEnviado(false);
                         throw new IllegalArgumentException(String.format("Destinatario %s no encontrado", e.getDestinatario()));
                     }
                     e.isEnviado(true);
