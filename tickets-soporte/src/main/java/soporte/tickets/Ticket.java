@@ -8,22 +8,17 @@ public abstract class Ticket {
     public Ticket(){
         this.ORIGEN = "";
     }
-    public Ticket(String d, String o,int prioridad){
-        this.descripcion = d;
-        this.ORIGEN = o;
+    public Ticket(String origem,int prioridad){
+        this.ORIGEN = toLowerString(origem);
         this.prioridad = prioridad;
+        this.descripcion = String.format("Ticket de %s con origen %s y prioridad %d",this.getClass().getSimpleName(),this.ORIGEN,this.prioridad);
     }
-    public Ticket(String origen, String descripcion){
-        this.ORIGEN = origen;
-        this.descripcion = descripcion;
-        
-    }
-
-    public String getDESCRIPCION() {
+   
+    protected String getDESCRIPCION() {
         return descripcion;
     }
-      public void setDESCRIPCION(String description) {
-       this.descripcion = description;
+     protected void setDESCRIPCION(String description) {
+       this.descripcion += description;
     }
 
     public String getORIGEN() {
@@ -46,7 +41,7 @@ public abstract class Ticket {
         this.prioridad = prioridad;
     }
     public void resolver(){
-        
+        if(isResulto()) setDESCRIPCION(" \"RESOLTO\" ");
     }
     
     protected abstract void validar()throws TicketException;
@@ -56,7 +51,7 @@ public abstract class Ticket {
     }
     @Override
     public String toString(){
-        return String.format("Ticket creado por: %s, Descripcion: %s", this.ORIGEN,this.descripcion);
+        return this.getDESCRIPCION();
     }
     
 }
