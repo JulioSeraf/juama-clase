@@ -4,20 +4,108 @@
     <groupId>org.hagane</groupId>
     <artifactId>tickets-soporte</artifactId>
     <version>1.0-SNAPSHOT</version>
+    
     <packaging>jar</packaging>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                
-            </plugin>
-        </plugins>
-    </build>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <exec.mainClass>soporte.TicketsSoporte</exec.mainClass>
+        <exec.mainClass>soporte.App</exec.mainClass>
+        
+        <exec-plugin.version>3.5.0</exec-plugin.version>
+        <compiler-plugin.version>3.13.0</compiler-plugin.version>
+        <surefire-plugin.version>3.2.5</surefire-plugin.version>
+        
+        <slf4j.version>2.0.16</slf4j.version>
+        <logback.version>1.5.16</logback.version>
+        <lombok.version>1.18.42</lombok.version>
+        <junit.version>5.10.2</junit.version>
     </properties>
+    
+    <dependencies>
+        <!-- LOGS -->
+        <!-- API (la que usas en el código) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- Implementación (motor de logs) -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        
+        <!-- LOMBOK -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        
+        <!-- JUNIT 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+            
+        <!--
+    <dependency>
+        <groupId></groupId>
+        <artifactId></artifactId>
+        <version></version>
+    </dependency>
+        -->
+  
+    </dependencies>
+    
+    <build>
+        <plugins>
+            
+            <!-- EXECUTION PLUGIN -->
+            <plugin>
+                
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-plugin.version}</version>
+
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass>
+                </configuration>
+            </plugin>
+            
+            <!-- MAVEN COMPILER (para LOMBOK) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+               
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            
+            <!-- SUREFIRE (para tests) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+            </plugin> 
+            
+        </plugins>
+    </build>
+
 </project>

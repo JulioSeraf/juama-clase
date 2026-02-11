@@ -8,7 +8,6 @@ public class TicketAdministrativo extends Ticket {
     public TicketAdministrativo(String origen,String tramite, int prioridad)throws TicketException{
         super(origen,prioridad);
         setDESCRIPCION(" Tramite: " + toLowerString(tramite));
-        validar();
     }
 
     @Override

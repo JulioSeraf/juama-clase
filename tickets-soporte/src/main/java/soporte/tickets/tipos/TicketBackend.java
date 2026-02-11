@@ -8,10 +8,9 @@ public class TicketBackend extends Ticket implements Escalable{
     public TicketBackend(){};
     public TicketBackend(String origen,int prioridad)throws TicketException{
         super(origen, prioridad);
-        validar();
     }
     @Override
-    protected final void validar() throws TicketException {
+    public final void validar() throws TicketException {
         if(super.getORIGEN().equals("admin")||super.getORIGEN().equals("frontend")){
             throw new TicketException("ERROR: Origem invaluida para este tipo de Ticket!!");
         }

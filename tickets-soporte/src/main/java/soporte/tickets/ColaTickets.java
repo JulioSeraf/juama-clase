@@ -37,8 +37,8 @@ public class ColaTickets {
             throw new TicketException("ERROR: Indice invalido!!");
         }
         if (indice > getNumTickets()) {
-                throw new TicketException("ERROR: Ticket inexistente");
-            }
+            throw new TicketException("ERROR: Ticket inexistente");
+        }
         for (int i = 0; i < getNumTickets(); i++) {
             if (indice == i) {
                 System.out.println(cola[i].toString());
@@ -49,18 +49,21 @@ public class ColaTickets {
 
     public void anyadeTicketFrontend(String origen, String ruta, int prioridad) throws TicketException {
         TicketFrontend ticket = new TicketFrontend(origen, ruta, prioridad);
+        ticket.validar();
         setCola(ticket);
         setNumTickets(1);
     }
 
     public void anyadeTicketBackend(String origen, int prioridad) throws TicketException {
         TicketBackend ticket = new TicketBackend(origen, prioridad);
+        ticket.validar();
         setNumTickets(1);
         setCola(ticket);
     }
 
     public void anyadeTicketAdministrativo(String origen, String tramite, int prioridad) throws TicketException {
         TicketAdministrativo ticket = new TicketAdministrativo(origen, tramite, prioridad);
+        ticket.validar();
         setCola(ticket);
         setNumTickets(1);
     }

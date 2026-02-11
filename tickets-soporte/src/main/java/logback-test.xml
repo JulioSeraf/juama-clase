@@ -1,0 +1,26 @@
+<configuration>
+
+    <!-- Carpeta y nombre del log -->
+    <property name="LOG_DIR" value="logs"/>
+    <property name="APP_NAME" value="herenciarpg"/>
+
+    <!-- Patrón -->
+    <property name="PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"/>
+
+    <!-- Consola -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Nivel global -->
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Ejemplo: tu paquete en DEBUG -->
+    <!-- <logger name="mantenimiento" level="DEBUG"/> -->
+
+</configuration>

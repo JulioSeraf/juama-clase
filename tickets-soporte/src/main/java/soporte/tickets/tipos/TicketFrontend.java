@@ -13,16 +13,15 @@ public class TicketFrontend extends Ticket implements Escalable{
         super(origen, prioridad);
         this.ruta = ruta;
         setDESCRIPCION(" Ruta: " + toLowerString(ruta));
-            validar();
     }
 
     @Override
-    protected final void validar() throws TicketException {
+    public final void validar() throws TicketException {
         if (!super.getORIGEN().equals("frontend")) {
             throw new TicketException("ERROR: Origen envalida para este tipo de Ticket!!");
         }
-        if (!(toLowerString(this.ruta).contains("checkout") || toLowerString(this.ruta).contains("pago")) && this.getPrioridad() == 1) {
-            super.setPrioridad(2);
+        if ((toLowerString(this.ruta).contains("checkout") || toLowerString(this.ruta).contains("pago")) && this.getPrioridad() == 2) {
+             throw new TicketException("ERROR: Prioridad envalida!!");
         }
         if (super.getPrioridad() != 1 && super.getPrioridad() != 2) {
             throw new TicketException("ERROR: Prioridad envalida!!");
