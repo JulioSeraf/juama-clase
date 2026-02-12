@@ -15,30 +15,42 @@ import soporte.tickets.TicketException;
  */
 @Slf4j
 public class TestBackend {
-    @Test
-    public void test_origen_prioridad1_ruta() throws TicketException{
-        TicketFrontend tf = new TicketFrontend("frontend","pago", 1);
-        TicketFrontend tf2 = new TicketFrontend("frontend","checkout", 1);
-        tf.validar();        
-        tf2.validar();
 
-    }
     @Test
-    public void test_origen_invalida() throws TicketException{
-        String[] origenes = {"backend","bbdd","admin","infra"};
-        for(String o: origenes){
-            TicketFrontend tf = new TicketFrontend(o,"checkout", 1);
-            assertThrowsExactly(TicketException.class, ()->tf.validar());          
+    public void validar_origen_invalida() throws TicketException {
+        TicketBackend bt = new TicketBackend("frontend", 2);
+        TicketBackend bt2 = new TicketBackend("admin", 1);
+        assertThrows(TicketException.class, () -> bt.validar());
+        assertThrows(TicketException.class, () -> bt2.validar());
+    }
+
+    @Test
+    public void validar_origen() throws TicketException {
+        String[] origenes = {"backend", "bbdd", "infra"};
+        for (String o : origenes) {
+            TicketBackend bf = new TicketBackend(o, 2);
+            bf.validar();
         }
     }
+
     @Test
-    public void test_prioridad() throws TicketException{
-        TicketFrontend tf = new TicketFrontend("frontend","pago", 2);
-        TicketFrontend tf2 = new TicketFrontend("frontend","checkout", 2);
-        TicketFrontend tf3 = new TicketFrontend("frontend","checkout", 3);
-        assertThrowsExactly(TicketException.class, ()->tf.validar());
-        assertThrowsExactly(TicketException.class, ()-> tf2.validar());
-        assertThrowsExactly(TicketException.class, ()-> tf3.validar());
+    public void validar_prioridad_1() throws TicketException {
+        TicketBackend bf = new TicketBackend("bbdd", 1);
+        bf.validar();
     }
-    
+
+    @Test
+    public void validar_prioridadConOrigen_invalidas() throws TicketException {
+        TicketBackend bt = new TicketBackend("backend", 1);
+        TicketBackend bt2 = new TicketBackend("infra", 1);
+        assertThrows(TicketException.class, () -> bt.validar());
+        assertThrows(TicketException.class, () -> bt2.validar());
+    }
+
+    @Test
+    public void validar_prioridad_3_invalidas() throws TicketException {
+        TicketBackend bt3 = new TicketBackend("infra", 3);
+        assertThrows(TicketException.class, () -> bt3.validar());
+    }
+   
 }
