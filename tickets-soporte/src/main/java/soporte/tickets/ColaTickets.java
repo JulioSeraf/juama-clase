@@ -15,11 +15,14 @@ public class ColaTickets {
 
     public void listaTicketsPendientes() throws TicketException {
         for (int i = 0; i < getNumTickets(); i++) {
-            System.out.printf("""
+            if (!cola[i].isResulto()) {
+                System.out.printf("""
                               \n
                                Indice de Ticket: %d
                                Ticket: %s
                                """, i, cola[i].toString());
+            }
+
         }
     }
 
@@ -33,53 +36,47 @@ public class ColaTickets {
     }
 
     public void muestraTicket(int indice) throws TicketException {
-        if (indice < 0 || indice > 100) {
-            throw new TicketException("ERROR: Indice invalido!!");
+        if (indice < 0 || indice > getNumTickets()) {
+            throw new TicketException("ERROR: indice !!");
         }
-        if (indice > getNumTickets()) {
-            throw new TicketException("ERROR: Ticket inexistente");
-        }
-        for (int i = 0; i < getNumTickets(); i++) {
-            if (indice == i) {
-                System.out.println(cola[i].toString());
-            }
-        }
+        System.out.println(cola[indice].toString());
 
+    }
+
+    private void anyadeTickets(Ticket t) throws TicketException {
+        Ticket ticket = t;
+        ticket.validar();
+        setCola(ticket);
+        setNumTickets(1);
+        System.out.println("Ticket añadido!");
     }
 
     public void anyadeTicketFrontend(String origen, String ruta, int prioridad) throws TicketException {
-        TicketFrontend ticket = new TicketFrontend(origen, ruta, prioridad);
-        ticket.validar();
-        setCola(ticket);
-        setNumTickets(1);
+        anyadeTickets(new TicketFrontend(origen, ruta, prioridad));
+
     }
 
     public void anyadeTicketBackend(String origen, int prioridad) throws TicketException {
-        TicketBackend ticket = new TicketBackend(origen, prioridad);
-        ticket.validar();
-        setNumTickets(1);
-        setCola(ticket);
+        anyadeTickets(new TicketBackend(origen, prioridad));
     }
 
     public void anyadeTicketAdministrativo(String origen, String tramite, int prioridad) throws TicketException {
-        TicketAdministrativo ticket = new TicketAdministrativo(origen, tramite, prioridad);
-        ticket.validar();
-        setCola(ticket);
-        setNumTickets(1);
+        anyadeTickets(new TicketAdministrativo(origen, tramite, prioridad));
     }
 
     public void escalaTicket(int indice) throws TicketException {
         if (indice < 0 || indice > 100) {
             throw new TicketException("Indice invalido!!");
         }
-        for (int i = 0; i < cola.length; i++) {
-            if (cola[i].isResulto()) {
-                throw new TicketException("ERROR: Ticket ya resulto no puede ser Escalado");
-            }
-            if (cola[i] instanceof Escalable) {
-                throw new TicketException("ERROR: Ticket de admin no puede ser Escalado");
-            }
+        if (cola[indice].isResulto()) {
+            throw new TicketException("ERROR: Ticket ya resulto no puede ser Escalado");
         }
+        if (cola[indice] instanceof Escalable esc) {
+            esc.escalar();
+        } else {
+            throw new TicketException("ERROR: Ticket de admin no puede ser Escalado");
+        }
+
     }
 
     public void resuelveTicket(int indice) throws TicketException {
@@ -119,7 +116,11 @@ public class ColaTickets {
         }
     }
 
-    public void setNumTickets(int numTickets) {
-        this.numTickets += numTickets;
+    public void setNumTickets(int numTickets) throws TicketException{
+        if (this.numTickets < 101) {
+            this.numTickets += numTickets;
+        }else{
+            throw new TicketException("Soporte de Ticket lleno!!");
+        }
     }
 }
