@@ -10,11 +10,13 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
 /**
  *
  * @author tarde
  */
 public class MyList<T> implements List<T> {
+
     private final InternalList<T> data;
 
     public MyList() {
@@ -35,11 +37,13 @@ public class MyList<T> implements List<T> {
     public boolean contains(Object o) {
         boolean find = false;
         Iterator<T> it = data.iterator();
-        do{
-           T el = it.next();
-           if(el.equals(o)) find = true;
-        }while(it.hasNext());
-        return find; 
+        do {
+            T el = it.next();
+            if (el.equals(o)) {
+                find = true;
+            }
+        } while (it.hasNext());
+        return find;
     }
 
     @Override
@@ -59,16 +63,28 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean add(T e) {
-       int oldSize = data.size();
-       data.add(e);
-       return oldSize > data.size();
+        int oldSize = data.size();
+        data.add(e);
+        return oldSize > data.size();
     }
 
     @Override
     public boolean remove(Object o) {
-       int oldSize = data.size();
-       data.remove()
-       return oldSize > data.size();
+        if (o == null) {
+            throw new NullPointerException("tipo de elemeto incompatible con esta lista");
+        }
+        int oldSize = data.size();
+        int index = 0;
+        boolean findEl = false;
+        Iterator<T> it = data.iterator();
+         do{
+            if(it.next().equals(o)){
+                findEl = true;
+                data.remove(index);
+                }
+            index++;
+        }while (it.hasNext() && !findEl);
+        return oldSize > data.size();
     }
 
     @Override
@@ -114,23 +130,27 @@ public class MyList<T> implements List<T> {
     }
 
     @Override
-    public void add(int index, T element) {
-        
+    public void add(int index, T element){
+        if(index < 0 || index > data.size()) throw new IndexOutOfBoundsException("index fuera del limite de la Lista");
+        if(element == null) throw new NullPointerException("las lista no integra elemetos null");
+        Iterator it = data.iterator();
+        while(it.hasNext()){
+            
+        }
     }
 
     @Override
     public T remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return data.remove(index);
     }
 
     @Override
     public int indexOf(Object o) {
-        int index = 0;
+        int index = 0; 
         Iterator<T> it = data.iterator();
-        do{
-             it.next();
-             index = 1;
-        }while(it.hasNext() && !it.next().equals(o));
+        while (it.hasNext() && !it.next().equals(o)) {
+            index++;
+        }
         return index;
     }
 
@@ -154,5 +174,4 @@ public class MyList<T> implements List<T> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-   
 }
