@@ -240,7 +240,7 @@ public class MyList<T> implements List<T>{
 
     @Override
     public int lastIndexOf(Object o) {
-        
+        return this.size() -1;
     }
 
     @Override
