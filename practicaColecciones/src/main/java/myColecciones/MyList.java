@@ -35,15 +35,16 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
-        boolean find = false;
+        if(o == null) throw new NullPointerException("Elemento nulo, esta lista no acepta elementos nulos");
+        boolean found = false;
         Iterator<T> it = data.iterator();
         do {
             T el = it.next();
             if (el.equals(o)) {
-                find = true;
+                found = true;
             }
         } while (it.hasNext());
-        return find;
+        return found;
     }
 
     @Override
@@ -63,6 +64,9 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean add(T e) {
+        if (e == null) {
+            throw new IllegalArgumentException("Elemento nulo, esta lista no acepta elementos nulos");
+        }
         int oldSize = data.size();
         data.add(e);
         return oldSize > data.size();
@@ -71,30 +75,38 @@ public class MyList<T> implements List<T> {
     @Override
     public boolean remove(Object o) {
         if (o == null) {
-            throw new NullPointerException("tipo de elemeto incompatible con esta lista");
+            throw new NullPointerException("Elemento nulo, esta lista no acepta elementos nulos");
         }
         int oldSize = data.size();
         int index = 0;
-        boolean findEl = false;
+        boolean foundEl = false;
         Iterator<T> it = data.iterator();
          do{
             if(it.next().equals(o)){
-                findEl = true;
+                foundEl = true;
                 data.remove(index);
                 }
             index++;
-        }while (it.hasNext() && !findEl);
+        }while (it.hasNext() && !foundEl);
         return oldSize > data.size();
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(c == null) throw new NullPointerException("Colleccion es nula!");
+        boolean found = true;
+        for(Object el : c){
+            if(el == null) throw new NullPointerException("Elemento nulo, esta lisa no acepta elementos nulos");
+            if(!this.contains(el) && found) {
+                found = false;
+            }
+        }
+        return found;
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        c.
     }
 
     @Override
@@ -155,8 +167,8 @@ public class MyList<T> implements List<T> {
     }
 
     @Override
-    public int lastIndexOf(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int lastIndexOf(Object o){
+
     }
 
     @Override
