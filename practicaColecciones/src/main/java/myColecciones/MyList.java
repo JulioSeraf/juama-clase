@@ -106,12 +106,25 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-
-    }
+        if(c == null) throw new NullPointerException("Collecion es Nula!");
+        int oldSize = data.size();
+        for(T el : c){
+            if(el == null) throw new NullPointerException("Elemento Nulo, esta lista no acepta elementos nulo");
+            this.add(el);
+        }
+        return oldSize< data.size();
+    } 
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Iterator<T> it = data.iterator();
+        while(it.hasNext()){
+            T el = it.next();
+        }
+        
+        for(T el : c){
+            
+        }
     }
 
     @Override
