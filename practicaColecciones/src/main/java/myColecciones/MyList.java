@@ -106,7 +106,7 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        c.
+
     }
 
     @Override
