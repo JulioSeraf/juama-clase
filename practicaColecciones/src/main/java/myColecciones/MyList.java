@@ -15,7 +15,7 @@ import java.util.ListIterator;
  *
  * @author tarde
  */
-public class MyList<T> implements List<T> {
+public class MyList<T> implements List<T>{
 
     private final InternalList<T> data;
 
@@ -204,9 +204,22 @@ public class MyList<T> implements List<T> {
         if (element == null) {
             throw new NullPointerException("las lista no integra elemetos null");
         }
-        Iterator it = data.iterator();
+        int indexEl = 0;
+        InternalList<T> resto = new InternalList<>();
+        Iterator<T> it = data.iterator();
         while (it.hasNext()) {
-
+            T el = it.next();
+            indexEl = this.indexOf(el);
+            if (indexEl >= index) {
+                resto.add(el);
+                this.remove(indexEl);
+            }
+            
+        }
+        data.add(element);
+         Iterator<T> itRes = resto.iterator();
+        while (itRes.hasNext()) {
+            this.add(itRes.next());
         }
     }
 
