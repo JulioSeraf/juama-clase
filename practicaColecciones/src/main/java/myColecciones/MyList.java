@@ -6,7 +6,6 @@ package myColecciones;
 
 import com.accedia.tarde.practicacolecciones.InternalList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -60,7 +59,7 @@ public class MyList<T> implements List<T>{
     }
 
     @Override
-    public <T> T[] toArray(T[] a) {
+    public <E> E[] toArray(E[] a) {
         return data.toArray(a);
     }
 
@@ -112,9 +111,6 @@ public class MyList<T> implements List<T>{
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-<<<<<<< HEAD
-    return null;
-=======
         if (c == null) {
             throw new NullPointerException("Collecion es Nula!");
         }
@@ -126,9 +122,7 @@ public class MyList<T> implements List<T>{
             this.add(el);
         }
         return oldSize < data.size();
->>>>>>> origin/main
     }
-
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         if (c == null) {
@@ -169,7 +163,7 @@ public class MyList<T> implements List<T>{
         while(it.hasNext()){
             this.remove(it.next());
         }
-        return data.size() == 0;
+        return data.isEmpty();
     }
 
     @Override
@@ -185,7 +179,10 @@ public class MyList<T> implements List<T>{
 
     @Override
     public void clear() {
-           
+          Iterator<T> it = data.iterator();
+          while(it.hasNext()){
+              this.remove(it.next());
+          }
     }
 
     @Override
@@ -259,7 +256,17 @@ public class MyList<T> implements List<T>{
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-       
+        if( fromIndex < 0 || toIndex > this.size() || fromIndex > toIndex) throw new IndexOutOfBoundsException("Valor de index invalido!");
+       Iterator<T> it = data.iterator();
+
+       while(it.hasNext()){
+           T el = it.next();
+          if(this.indexOf(el) < fromIndex || this.indexOf(el) > toIndex){
+              this.remove(el);
+          }
+       }
+       if(fromIndex == toIndex) this.clear();
+       return this;
     }
 
 }
