@@ -19,9 +19,11 @@ public class MyDeque<T> extends MyQueue<T> implements Deque<T>{
     }
     @Override
     public void addFirst(T e) {
-        
-        
-        
+        MyList<T> nDeque = new MyList<>();
+        nDeque.add(e);
+        nDeque.addAll(deque);
+        deque.clear();
+        deque.addAll(nDeque);
     }
 
     @Override
