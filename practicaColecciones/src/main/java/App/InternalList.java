@@ -1,5 +1,5 @@
 
-package com.accedia.tarde.practicacolecciones;
+package App;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,8 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
+package App;
 
-package com.accedia.tarde.practicacolecciones;
+import myColecciones.MyList;
 
 /**
  *
@@ -11,6 +12,10 @@ package com.accedia.tarde.practicacolecciones;
 public class PracticaColecciones {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        MyList<String> li = new MyList<>();
+        li.add("julio");
+        li.add("carlos");
+        System.out.println(li.contains("julio"));
+
     }
 }

@@ -4,7 +4,7 @@
  */
 package myColecciones;
 
-import com.accedia.tarde.practicacolecciones.InternalList;
+import App.InternalList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.ListIterator;
  *
  * @author tarde
  */
-public class MyList<T> implements List<T>{
+public class MyList<T> implements List<T> {
 
     private final InternalList<T> data;
 
@@ -39,12 +39,12 @@ public class MyList<T> implements List<T>{
         }
         boolean found = false;
         Iterator<T> it = data.iterator();
-        do {
+        while (it.hasNext() && !found) {
             T el = it.next();
             if (el.equals(o)) {
                 found = true;
             }
-        } while (it.hasNext());
+        }
         return found;
     }
 
@@ -82,13 +82,13 @@ public class MyList<T> implements List<T>{
         int index = 0;
         boolean foundEl = false;
         Iterator<T> it = data.iterator();
-        do {
+        while (it.hasNext() && !foundEl) {
             if (it.next().equals(o)) {
                 foundEl = true;
                 data.remove(index);
             }
             index++;
-        } while (it.hasNext() && !foundEl);
+        };
         return oldSize > data.size();
     }
 
@@ -123,12 +123,13 @@ public class MyList<T> implements List<T>{
         }
         return oldSize < data.size();
     }
+
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         if (c == null) {
             throw new NullPointerException("Collecion es Nula!");
         }
-        if (index < 0 || index > data.size()){
+        if (index < 0 || index > data.size()) {
             throw new IndexOutOfBoundsException("Index no inexistente/invalido!");
         }
         int oldSize = data.size();
@@ -142,7 +143,7 @@ public class MyList<T> implements List<T>{
                 resto.add(el);
                 this.remove(indexEl);
             }
-            
+
         }
         for (T el : c) {
             if (el == null) {
@@ -160,7 +161,7 @@ public class MyList<T> implements List<T>{
     @Override
     public boolean removeAll(Collection<?> c) {
         Iterator<T> it = data.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             this.remove(it.next());
         }
         return data.isEmpty();
@@ -169,20 +170,22 @@ public class MyList<T> implements List<T>{
     @Override
     public boolean retainAll(Collection<?> c) {
         int oldSize = data.size();
-         Iterator<T> it = data.iterator();
-         while(it.hasNext()){
-             T el = it.next();
-             if(!c.contains(el)) this.remove(el);
-         }
-         return oldSize < data.size();
+        Iterator<T> it = data.iterator();
+        while (it.hasNext()) {
+            T el = it.next();
+            if (!c.contains(el)) {
+                this.remove(el);
+            }
+        }
+        return oldSize < data.size();
     }
 
     @Override
     public void clear() {
-          Iterator<T> it = data.iterator();
-          while(it.hasNext()){
-              this.remove(it.next());
-          }
+        Iterator<T> it = data.iterator();
+        while (it.hasNext()) {
+            this.remove(it.next());
+        }
     }
 
     @Override
@@ -215,10 +218,10 @@ public class MyList<T> implements List<T>{
                 resto.add(el);
                 this.remove(indexEl);
             }
-            
+
         }
         data.add(element);
-         Iterator<T> itRes = resto.iterator();
+        Iterator<T> itRes = resto.iterator();
         while (itRes.hasNext()) {
             this.add(itRes.next());
         }
@@ -241,7 +244,7 @@ public class MyList<T> implements List<T>{
 
     @Override
     public int lastIndexOf(Object o) {
-        return this.size() -1;
+        return this.size() - 1;
     }
 
     @Override
@@ -256,17 +259,21 @@ public class MyList<T> implements List<T>{
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        if( fromIndex < 0 || toIndex > this.size() || fromIndex > toIndex) throw new IndexOutOfBoundsException("Valor de index invalido!");
-       Iterator<T> it = data.iterator();
+        if (fromIndex < 0 || toIndex > this.size() || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Valor de index invalido!");
+        }
+        Iterator<T> it = data.iterator();
 
-       while(it.hasNext()){
-           T el = it.next();
-          if(this.indexOf(el) < fromIndex || this.indexOf(el) > toIndex){
-              this.remove(el);
-          }
-       }
-       if(fromIndex == toIndex) this.clear();
-       return this;
+        while (it.hasNext()) {
+            T el = it.next();
+            if (this.indexOf(el) < fromIndex || this.indexOf(el) > toIndex) {
+                this.remove(el);
+            }
+        }
+        if (fromIndex == toIndex) {
+            this.clear();
+        }
+        return this;
     }
 
 }
