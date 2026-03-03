@@ -15,7 +15,7 @@ import java.util.ListIterator;
  *
  * @author tarde
  */
-public class MyList<T> implements List<T> {
+public class MyList<T> implements List<T>{
 
     private final InternalList<T> data;
 
@@ -35,7 +35,9 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
-        if(o == null) throw new NullPointerException("Elemento nulo, esta lista no acepta elementos nulos");
+        if (o == null) {
+            throw new NullPointerException("Elemento nulo, esta lista no acepta elementos nulos");
+        }
         boolean found = false;
         Iterator<T> it = data.iterator();
         do {
@@ -81,23 +83,27 @@ public class MyList<T> implements List<T> {
         int index = 0;
         boolean foundEl = false;
         Iterator<T> it = data.iterator();
-         do{
-            if(it.next().equals(o)){
+        do {
+            if (it.next().equals(o)) {
                 foundEl = true;
                 data.remove(index);
-                }
+            }
             index++;
-        }while (it.hasNext() && !foundEl);
+        } while (it.hasNext() && !foundEl);
         return oldSize > data.size();
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        if(c == null) throw new NullPointerException("Colleccion es nula!");
+        if (c == null) {
+            throw new NullPointerException("Colleccion es nula!");
+        }
         boolean found = true;
-        for(Object el : c){
-            if(el == null) throw new NullPointerException("Elemento nulo, esta lisa no acepta elementos nulos");
-            if(!this.contains(el) && found) {
+        for (Object el : c) {
+            if (el == null) {
+                throw new NullPointerException("Elemento nulo, esta lisa no acepta elementos nulos");
+            }
+            if (!this.contains(el) && found) {
                 found = false;
             }
         }
@@ -106,27 +112,80 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
+<<<<<<< HEAD
     return null;
+=======
+        if (c == null) {
+            throw new NullPointerException("Collecion es Nula!");
+        }
+        int oldSize = data.size();
+        for (T el : c) {
+            if (el == null) {
+                throw new NullPointerException("Elemento Nulo, esta lista no acepta elementos nulo");
+            }
+            this.add(el);
+        }
+        return oldSize < data.size();
+>>>>>>> origin/main
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (c == null) {
+            throw new NullPointerException("Collecion es Nula!");
+        }
+        if (index < 0 || index > data.size()){
+            throw new IndexOutOfBoundsException("Index no inexistente/invalido!");
+        }
+        int oldSize = data.size();
+        int indexEl = 0;
+        InternalList<T> resto = new InternalList<>();
+        Iterator<T> it = data.iterator();
+        while (it.hasNext()) {
+            T el = it.next();
+            indexEl = this.indexOf(el);
+            if (indexEl >= index) {
+                resto.add(el);
+                this.remove(indexEl);
+            }
+            
+        }
+        for (T el : c) {
+            if (el == null) {
+                throw new NullPointerException("Elemento Nulo, esta lista no acepta elementos nulo");
+            }
+            data.add(el);
+        }
+        Iterator<T> itRes = resto.iterator();
+        while (itRes.hasNext()) {
+            this.add(itRes.next());
+        }
+        return oldSize < data.size();
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Iterator<T> it = data.iterator();
+        while(it.hasNext()){
+            this.remove(it.next());
+        }
+        return data.size() == 0;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int oldSize = data.size();
+         Iterator<T> it = data.iterator();
+         while(it.hasNext()){
+             T el = it.next();
+             if(!c.contains(el)) this.remove(el);
+         }
+         return oldSize < data.size();
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           
     }
 
     @Override
@@ -142,12 +201,29 @@ public class MyList<T> implements List<T> {
     }
 
     @Override
-    public void add(int index, T element){
-        if(index < 0 || index > data.size()) throw new IndexOutOfBoundsException("index fuera del limite de la Lista");
-        if(element == null) throw new NullPointerException("las lista no integra elemetos null");
-        Iterator it = data.iterator();
-        while(it.hasNext()){
+    public void add(int index, T element) {
+        if (index < 0 || index > data.size()) {
+            throw new IndexOutOfBoundsException("index fuera del limite de la Lista");
+        }
+        if (element == null) {
+            throw new NullPointerException("las lista no integra elemetos null");
+        }
+        int indexEl = 0;
+        InternalList<T> resto = new InternalList<>();
+        Iterator<T> it = data.iterator();
+        while (it.hasNext()) {
+            T el = it.next();
+            indexEl = this.indexOf(el);
+            if (indexEl >= index) {
+                resto.add(el);
+                this.remove(indexEl);
+            }
             
+        }
+        data.add(element);
+         Iterator<T> itRes = resto.iterator();
+        while (itRes.hasNext()) {
+            this.add(itRes.next());
         }
     }
 
@@ -158,7 +234,7 @@ public class MyList<T> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
-        int index = 0; 
+        int index = 0;
         Iterator<T> it = data.iterator();
         while (it.hasNext() && !it.next().equals(o)) {
             index++;
@@ -167,23 +243,23 @@ public class MyList<T> implements List<T> {
     }
 
     @Override
-    public int lastIndexOf(Object o){
-
+    public int lastIndexOf(Object o) {
+        return this.size() -1;
     }
 
     @Override
     public ListIterator<T> listIterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return data.listIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return data.listIterator(index);
     }
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
     }
 
 }
