@@ -7,123 +7,134 @@ package myColecciones;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
  * @author tarde
  */
-public class MyDeque<T> extends MyQueue<T> implements Deque<T>{
-    private final MyList<T> deque;
-    public MyDeque(){
-        this.deque = new MyList<>();
+public class MyDeque<T> extends MyQueue<T> implements Deque<T> {
+
+    public MyDeque() {
     }
     @Override
     public void addFirst(T e) {
-        MyList<T> nDeque = new MyList<>();
-        nDeque.add(e);
-        nDeque.addAll(deque);
-        deque.clear();
-        deque.addAll(nDeque);
+       list.noElementesNull(e);
+        list.addFirst(e);
     }
 
     @Override
     public void addLast(T e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        list.noElementesNull(e);
+        list.addLast(e);
     }
 
     @Override
     public boolean offerFirst(T e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int oldSize = list.size();
+        list.noElementesNull(e);
+        list.addFirst(e);
+        return oldSize < list.size();
     }
 
     @Override
     public boolean offerLast(T e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int oldSize = list.size();
+        list.noElementesNull(e);
+        list.addLast(e);
+        return oldSize < list.size();
     }
 
     @Override
     public T removeFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.removeFirst();
     }
 
     @Override
     public T removeLast() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (list.isEmpty()) {
+            throw new NoSuchElementException("Colleción vacia!");
+        }
+        return list.removeLast();
     }
 
     @Override
     public T pollFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.isEmpty() ? null : list.removeFirst();
     }
 
     @Override
     public T pollLast() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.isEmpty() ? null : list.removeLast();
     }
 
     @Override
     public T getFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.get(0);
     }
 
     @Override
     public T getLast() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.get(list.size() - 1);
     }
 
     @Override
     public T peekFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
     public T peekLast() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.isEmpty() ? null : list.get(list.size() - 1);
     }
 
     @Override
     public boolean removeFirstOccurrence(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return list.remove(o);
     }
+    
+    
 
     @Override
     public boolean removeLastOccurrence(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int oldSize = list.size();
+        list.remove(list.lastIndexOf(o));
+        return oldSize > list.size();
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return deque.addAll(c);
+        return list.addAll(c);
     }
 
     @Override
     public void push(T e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        list.add(e);
     }
 
     @Override
     public T pop() {
-        
+        return list.remove(0);
     }
 
     @Override
     public boolean remove(Object o) {
-       return deque.remove(o);
+        return list.remove(o);
     }
 
     @Override
     public boolean contains(Object o) {
-        return deque.contains(o);
+        return list.contains(o);
     }
 
     @Override
     public int size() {
-        return deque.size();
+        return list.size();
     }
 
     @Override
     public Iterator<T> iterator() {
-        return deque.iterator();
+        return list.iterator();
     }
 
     @Override
@@ -134,36 +145,37 @@ public class MyDeque<T> extends MyQueue<T> implements Deque<T>{
 
     @Override
     public boolean isEmpty() {
-        return deque.isEmpty();
+        return list.isEmpty();
     }
 
     @Override
     public Object[] toArray() {
-        return deque.toArray();
+        return list.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return deque.toArray(a);
+        return list.toArray(a);
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return deque.containsAll(c);    }
+        return list.containsAll(c);
+    }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return deque.removeAll(c);
+        return list.removeAll(c);
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return deque.retainAll(c);
+        return list.retainAll(c);
     }
 
     @Override
     public void clear() {
-        deque.clear();
+        list.clear();
     }
-    
+
 }

@@ -11,30 +11,30 @@ import java.util.NoSuchElementException;
  * @author tarde
  */
 public class MyQueue<E> {
-    private final MyList<E> queue;
+    protected final MyList<E> list;
     public MyQueue(){
-        this.queue = new MyList<>();
+        this.list = new MyList<>();
     }
     public boolean add(E e){
         if(e == null) throw new NullPointerException("Esta cola no Acepta elementos nulos");
-        return queue.add(e);
+        return list.add(e);
     }
     public boolean offer(E e){
          if(e == null) throw new NullPointerException("Esta cola no Acepta elementos nulos");
-         return queue.add(e);
+         return list.add(e);
     }
     public E remove(){
-        if(queue.isEmpty()) throw new NoSuchElementException("Cola esta vacia");
-        return queue.remove(0);
+        if(list.isEmpty()) throw new NoSuchElementException("Cola esta vacia");
+        return list.remove(0);
     }
     public E poll(){
-        return queue.isEmpty()? null: queue.remove(0);
+        return list.isEmpty()? null: list.remove(0);
     }
     public E element(){
-        if(queue.isEmpty()) throw new NoSuchElementException("Cola esta vacia");
-        return queue.get(0);
+        if(list.isEmpty()) throw new NoSuchElementException("Cola esta vacia");
+        return list.get(0);
     }
     public E peek(){
-        return queue.isEmpty()?null:queue.get(0);
+        return list.isEmpty()?null:list.get(0);
     }
 }

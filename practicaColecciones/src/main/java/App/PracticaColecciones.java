@@ -12,10 +12,5 @@ import myColecciones.MyList;
 public class PracticaColecciones {
 
     public static void main(String[] args) {
-        MyList<String> li = new MyList<>();
-        li.add("julio");
-        li.add("carlos");
-        System.out.println(li.contains("julio"));
-
     }
 }
