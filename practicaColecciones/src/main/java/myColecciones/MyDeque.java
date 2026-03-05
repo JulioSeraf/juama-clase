@@ -19,20 +19,20 @@ public class MyDeque<T> extends MyQueue<T> implements Deque<T> {
     }
     @Override
     public void addFirst(T e) {
-       list.noElementesNull(e);
+       list.throwNoElementesNull(e);
         list.addFirst(e);
     }
 
     @Override
     public void addLast(T e) {
-        list.noElementesNull(e);
+        list.throwNoElementesNull(e);
         list.addLast(e);
     }
 
     @Override
     public boolean offerFirst(T e) {
         int oldSize = list.size();
-        list.noElementesNull(e);
+        list.throwNoElementesNull(e);
         list.addFirst(e);
         return oldSize < list.size();
     }
@@ -40,7 +40,7 @@ public class MyDeque<T> extends MyQueue<T> implements Deque<T> {
     @Override
     public boolean offerLast(T e) {
         int oldSize = list.size();
-        list.noElementesNull(e);
+        list.throwNoElementesNull(e);
         list.addLast(e);
         return oldSize < list.size();
     }

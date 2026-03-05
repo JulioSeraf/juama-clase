@@ -35,7 +35,7 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
-        noElementesNull(o);
+        throwNoElementesNull(o);
         boolean found = false;
         Iterator<T> it = data.iterator();
         while (it.hasNext() && !found) {
@@ -64,15 +64,15 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean add(T e) {
-        noElementesNull(e);
+        throwNoElementesNull(e);
         int oldSize = data.size();
         data.add(e);
-        return oldSize > data.size();
+        return oldSize < data.size();
     }
 
     @Override
     public boolean remove(Object o) {
-        noElementesNull(o);
+        throwNoElementesNull(o);
         int oldSize = data.size();
         int index = 0;
         boolean foundEl = false;
@@ -89,14 +89,12 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        if (c == null) {
-            throw new NullPointerException("Colleccion es nula!");
-        }
+        throwNoCollecionNull(c);
         boolean found = true;
         Iterator it = c.iterator();
         while (it.hasNext() && found) {
             Object el = it.next();
-            noElementesNull(el);
+            throwNoElementesNull(el);
             if (!this.contains(el)) {
                 found = false;
             }
@@ -106,12 +104,10 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        if (c == null) {
-            throw new NullPointerException("Collecion es Nula!");
-        }
+        throwNoCollecionNull(c);
         int oldSize = data.size();
         for (T el : c) {
-            noElementesNull(el);
+            throwNoElementesNull(el);
             this.add(el);
         }
         return oldSize < data.size();
@@ -119,32 +115,16 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        if (c == null) {
-            throw new NullPointerException("Collecion es Nula!");
-        }
+        throwNoCollecionNull(c);
         if (index < 0 || index > data.size()) {
             throw new IndexOutOfBoundsException("Index no inexistente/invalido!");
         }
         int oldSize = data.size();
-        int indexEl = 0;
-        InternalList<T> resto = new InternalList<>();
-        Iterator<T> it = data.iterator();
+        Iterator<? extends T> it = c.iterator();
         while (it.hasNext()) {
             T el = it.next();
-            indexEl = this.indexOf(el);
-            if (indexEl >= index) {
-                resto.add(el);
-                this.remove(indexEl);
-            }
-
-        }
-        for (T el : c) {
-            noElementesNull(el);
-            data.add(el);
-        }
-        Iterator<T> itRes = resto.iterator();
-        while (itRes.hasNext()) {
-            this.add(itRes.next());
+            throwNoElementesNull(el);
+            data.add(index++, el);
         }
         return oldSize < data.size();
     }
@@ -160,14 +140,12 @@ public class MyList<T> implements List<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        if (c == null) {
-            throw new NullPointerException("Collecion NULA");
-        }
+        throwNoCollecionNull(c);
         int oldSize = data.size();
         Iterator<T> it = data.iterator();
         while (it.hasNext()) {
             T el = it.next();
-            noElementesNull(el);
+            throwNoElementesNull(el);
             if (!c.contains(el)) {
                 this.remove(el);
             }
@@ -182,7 +160,6 @@ public class MyList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        if(index < 0 || index >= size()) throw new IndexOutOfBoundsException("Index fuera de rango");
         if (data.isEmpty()) {
             throw new NoSuchElementException("Colleción vacia!");
         }
@@ -208,27 +185,33 @@ public class MyList<T> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
-        noElementesNull(o);
-        int index = 0;
+        throwNoElementesNull(o);
+        int index = -1;
+        boolean found = false;
         Iterator<T> it = data.iterator();
-        while (it.hasNext() && !it.next().equals(o)) {
+        while (it.hasNext() && !found) {
             index++;
+            if (it.next().equals(o)) {
+                found = true;
+            }
         }
         return index;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        noElementesNull(o);
-        int index = data.size();
-        boolean found = false;
-        while (!found) {
-            if (data.get(index).equals(o)) {
-                found = true;
+        throwNoElementesNull(o);
+        int index = -1;
+        int found = 0;
+        Iterator it = data.iterator();
+        while (it.hasNext()) {
+            Object el = it.next();
+            index++;
+            if (el.equals(o)) {
+                found = index;
             }
-            index--;
         }
-        return index + 1;
+        return found;
     }
 
     @Override
@@ -246,20 +229,32 @@ public class MyList<T> implements List<T> {
         if (fromIndex < 0 || toIndex > this.size() || fromIndex > toIndex) {
             throw new IndexOutOfBoundsException("Valor de index invalido!");
         }
+        MyList<T> subL = new MyList<>();
         Iterator<T> it = data.iterator();
-
-        while (it.hasNext()) {
-            T el = it.next();
-            if (this.indexOf(el) < fromIndex || this.indexOf(el) > toIndex) {
-                this.remove(el);
-            }
+        for (int i = fromIndex; i < toIndex; i++) {
+            subL.add(data.get(i));
         }
-        if (fromIndex == toIndex) {
-            this.clear();
-        }
-        return this;
+        return subL;
     }
-    public void noElementesNull(Object el){
-           if(el == null) throw new NullPointerException("Esta lista no acepta elementos vacios");
+
+    public static <T> MyList<T> concat(MyList<T> l1, MyList<T> l2) {
+        MyList<T> list = new MyList<>();
+        list.throwNoCollecionNull(l1);
+        list.throwNoCollecionNull(l2);
+        list.addAll(l1);
+        list.addAll(l2);
+        return list;
+    }
+
+    protected void throwNoElementesNull(Object el) {
+        if (el == null) {
+            throw new NullPointerException("Esta lista no acepta elementos vacios");
+        }
+    }
+
+    protected void throwNoCollecionNull(Object el) {
+        if (el == null) {
+            throw new NullPointerException("Esta lista no acepta elementos vacios");
+        }
     }
 }
