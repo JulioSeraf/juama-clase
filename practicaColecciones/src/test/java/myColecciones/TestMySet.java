@@ -22,6 +22,12 @@ public class TestMySet {
         listToAdd.add(33);
         listToAdd.add(203);
         listToAdd.add(43);
-        
+
+        Assertions.assertTrue(list.addAll(listToAdd));
+        MySet<Integer> listToReadicionar = new MySet<>();
+        Assertions.assertEquals(5, list.size());
+        listToReadicionar.add(33);
+        listToReadicionar.add(22);
+        Assertions.assertFalse(list.addAll(listToReadicionar));
     }
 }
