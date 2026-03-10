@@ -21,10 +21,10 @@ public class MyStack<E> {
         return item;
     }
     public E pop(){
-        return pila.remove(pila.size()-1);
+        return pila.removeLast();
     }
     public E peek(){
-        return pila.get(pila.size()-1);
+        return pila.getLast();
     }
     public int search(E o){
         int posicion = 0;
