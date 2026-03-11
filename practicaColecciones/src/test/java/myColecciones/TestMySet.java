@@ -9,8 +9,8 @@ public class TestMySet {
         MySet<Integer> list = new MySet<>();
         list.add(22);
         list.add(33);
-        Assertions.assertTrue(list.add(31));
-        Assertions.assertFalse(list.add(22));
+        Assertions.assertTrue(list.add(31),"Error en teste de añadido correto");
+        Assertions.assertFalse(list.add(22),"Error en teste de añadido incorreto");
     }
     @Test
     public void validar_addAll(){
@@ -23,11 +23,11 @@ public class TestMySet {
         listToAdd.add(203);
         listToAdd.add(43);
 
-        Assertions.assertTrue(list.addAll(listToAdd));
+        Assertions.assertTrue(list.addAll(listToAdd),"Error en teste de añadido esperado");
         MySet<Integer> listToReadicionar = new MySet<>();
-        Assertions.assertEquals(5, list.size());
+        Assertions.assertEquals(5, list.size(), "Error en teste de tamaño pos añadido");
         listToReadicionar.add(33);
         listToReadicionar.add(22);
-        Assertions.assertFalse(list.addAll(listToReadicionar));
+        Assertions.assertFalse(list.addAll(listToReadicionar),"Error en teste de NO añadido");
     }
 }

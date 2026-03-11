@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="practicaColecciones:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/practicaColecciones_jar</output-path>
+    <root id="archive" name="practicaColecciones_jar.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="practicaColecciones" />
+      <element id="archive" name="PraticaColecciones-Julio.jar" />
+    </root>
+  </artifact>
+</component>

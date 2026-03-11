@@ -98,7 +98,9 @@ public class MyDeque<T> extends MyQueue<T> implements Deque<T> {
     @Override
     public boolean removeLastOccurrence(Object o) {
         int oldSize = list.size();
-        list.remove(list.lastIndexOf(o));
+        if(list.lastIndexOf(o) != -1){
+            list.remove(list.lastIndexOf(o));
+        }
         return oldSize > list.size();
     }
 

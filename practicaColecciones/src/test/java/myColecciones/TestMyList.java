@@ -5,11 +5,8 @@ package myColecciones;
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 import myColecciones.MyList;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -21,18 +18,18 @@ public class TestMyList {
     @Test
     public void validar_size() {
         MyList<String> list = new MyList<>();
-        assertEquals(0, list.size());
+        assertEquals(0, list.size(),"Error en teste si devolve 0");
         list.add("Julio");
         list.add("Serafim");
-        assertEquals(2, list.size());
+        assertEquals(2, list.size(),"Error en teste si lista hay 2 elementos");
     }
 
     @Test
     public void validar_isEmpty() {
         MyList<String> list = new MyList<>();
-        assertTrue(list.isEmpty());
+        assertTrue(list.isEmpty(),"Error en el teste si la lista esta vacia");
         list.add("julio");
-        assertFalse(list.isEmpty());
+        assertFalse(list.isEmpty(), "Error en el teste si en la lista hay elementos");
     }
 
     @Test
@@ -40,7 +37,7 @@ public class TestMyList {
         MyList<Integer> list = new MyList<>();
         assertThrows(NullPointerException.class, () -> {
             list.throwNoElementesNull(null);
-        });
+        },"Error en el teste si elemento es null");
     }
 
     @Test
@@ -49,7 +46,7 @@ public class TestMyList {
         MyList<Integer> listToAdd = null;
         assertThrows(NullPointerException.class, () -> {
             list.throwNoCollecionNull(listToAdd);
-        });
+        },"Error en teste si colección está vacía");
     }
 
     @Test
@@ -57,8 +54,8 @@ public class TestMyList {
         MyList<String> list = new MyList<>();
         list.add("Julio");
         list.add("Oliveira");
-        assertTrue(list.contains("Julio"));
-        assertFalse(list.contains("Luana"));
+        assertTrue(list.contains("Julio"),"Error en el teste si en la lista contiene el elemento");
+        assertFalse(list.contains("Luana"),"Error en el teste si en la lista no contiene el elemento");
     }
 
     @Test
@@ -69,12 +66,12 @@ public class TestMyList {
         listToAdd.add("Messi");
         list.add("Cristiano");
         list.add("Messi");
-        assertTrue(list.containsAll(listToAdd));
+        assertTrue(list.containsAll(listToAdd),"Error en el teste si en la lista contiene todos los elementos");
 
         listToAdd.add("Julio");
         listToAdd.add("Oliveira");
 
-        assertFalse(list.containsAll(listToAdd));
+        assertFalse(list.containsAll(listToAdd),"Error en el teste si en la lista no contiene todos los elementos");
     }
 
     @Test
@@ -83,7 +80,7 @@ public class TestMyList {
         MyList<String> listToAdd = new MyList<>();
         listToAdd.add("Cristiano");
         listToAdd.add("Messi");
-        assertTrue(list.addAll(listToAdd));
+        assertTrue(list.addAll(listToAdd),"Error en el teste de adicionar todos elemento de la lista");
     }
 
     @Test
@@ -94,10 +91,10 @@ public class TestMyList {
         listToAdd.add("Messi");
         list.add("PEDRO");
         list.add("Maria");
-        assertTrue(list.addAll(1, listToAdd));
+        assertTrue(list.addAll(1, listToAdd), "Error en el teste de adicionar todos elementos a la lista con index");
         assertThrows(IndexOutOfBoundsException.class, () -> {
             list.addAll(5, listToAdd);
-        });
+        },"Error en el teste de adicionar lista en index inexistente");
     }
 
     @Test
@@ -105,8 +102,8 @@ public class TestMyList {
         MyList<String> list = new MyList<>();
         list.add("julio");
         list.add("serafim");
-        assertEquals(0, list.indexOf("julio"));
-        assertNotEquals(0, list.indexOf("serafim"));
+        assertEquals(0, list.indexOf("julio"),"Error en el teste de index correto");
+        assertNotEquals(0, list.indexOf("serafim"), "Error en el teste de index incorreto");
     }
 
     @Test
@@ -115,8 +112,8 @@ public class TestMyList {
         list.add("julio");
         list.add("serafim");
         list.add("julio");
-        assertEquals(2, list.lastIndexOf("julio"));
-        assertNotEquals(1, list.lastIndexOf("julio"));
+        assertEquals(2, list.lastIndexOf("julio"),"ERROR en teste de indexOf correto");
+        assertNotEquals(1, list.lastIndexOf("julio"),"Error en teste de indexOf incorreto");
     }
 
     @Test
@@ -125,21 +122,21 @@ public class TestMyList {
         list.add("julio");
         list.add("serafim");
         list.add("Carlos");
-        assertTrue(list.subList(0, 1).size() == 1);
-        assertFalse(!list.subList(1, 1).isEmpty());
+        assertEquals(1, list.subList(0, 1).size(),"Error en el teste de tamaño esperado");
+        assertTrue(list.subList(1, 1).isEmpty(), "Error en el teste de tamaño no esperado");
     }
 
     @Test
     public void validar_concat() {
-        MyList<String> l1 = new MyList<>(); 
+        MyList<String> l1 = new MyList<>();
         l1.add("julio");
         l1.add("julio");
         l1.add("sera");
         MyList<String> l2 = new MyList<>();
         l2.add("pedro");
         l2.add("Carlos");
-        assertEquals(5,MyList.concat(l1, l2).size());
-        assertNotEquals(3,MyList.concat(l1, l2).size());
+        assertEquals(5,MyList.concat(l1, l2).size(), "Error en teste de concat esperado");
+        assertNotEquals(3,MyList.concat(l1, l2).size(), "Error en teste de concat inesperado");
         
     }
 }
